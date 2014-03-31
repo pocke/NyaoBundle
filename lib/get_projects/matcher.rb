@@ -23,5 +23,7 @@ module GetProjects
       end
     end
     self.add_matchers
+
+    class DontMatch < StandardError; end
   end
 end
