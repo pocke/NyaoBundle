@@ -29,6 +29,11 @@ module GetProjects::Matcher
       All << name
     end
 
+    include Enumerable
+    def each(*args)
+      All.each(*args)
+    end
+
     def add_matchers
       files = []
       Dirs.each do |dir|
@@ -39,5 +44,6 @@ module GetProjects::Matcher
       end
     end
   end
+
   self.add_matchers
 end

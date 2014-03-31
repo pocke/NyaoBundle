@@ -11,7 +11,7 @@ describe GetProjects::Matcher do
       end
 
       it 'should be include added matcher' do 
-        expect(GetProjects::Matcher::All).to be_include(:mat)
+        expect(subject).to be_include(:mat)
       end
     end
 
@@ -22,5 +22,12 @@ describe GetProjects::Matcher do
         expect{matcher}.to raise_error(GetProjects::Matcher::WrongMatcher)
       end
     end
+
+  end
+
+  describe Enumerable do
+    subject{GetProjects::Matcher}
+
+    its(:each){should be_kind_of Enumerator}
   end
 end
