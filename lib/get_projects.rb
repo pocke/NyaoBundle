@@ -5,7 +5,7 @@ module GetProjects
   class << self
     def get(project, opt = {})
       address = nil
-      Matcher.any? do |matcher|
+      Matcher.any? do |key, matcher|
         address = matcher.call(project, opt)
       end
       raise Matcher::DontMatch unless address

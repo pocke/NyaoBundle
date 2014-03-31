@@ -14,7 +14,13 @@ module GetProjects
 
           include Enumerable
           def each(*args)
-            self::All.each(*args)
+            if block_given? then
+              self::All.each do |x|
+                yield x
+              end
+            else
+              self::All.each(*args)
+            end
           end
 
           def [](key)
