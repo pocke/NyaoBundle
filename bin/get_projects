@@ -1,3 +1,7 @@
 #!/usr/bin/env ruby
 
-puts 'hoge'
+require_relative '../lib/get_projects'
+
+include GetProjects
+
+load File::join(Dir::pwd, '.get_projectsrc')
