@@ -27,6 +27,10 @@ module GetProjects::Matcher
       All.each(*args)
     end
 
+    def [](key)
+      All[key]
+    end
+
     def add_matchers
       files = []
       Dirs.each do |dir|

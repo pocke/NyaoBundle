@@ -17,6 +17,10 @@ module GetProjects::Getter
       All.each(*args)
     end
 
+    def [](key)
+      All[key]
+    end
+
     def add_getters
       files = []
       Dirs.each do |dir|
