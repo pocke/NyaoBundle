@@ -13,6 +13,8 @@ module GetProjects::Matcher
 
   class << self
     # matcher を定義する。
+    # マッチしなければ nil を、マッチすれば getter に必要な URL などを返す。
+    # また、マッチした場合は opt を適当に編集する。
     def create(matcher_name, &body)
       raise ArgumentError unless matcher_name.is_a?(Symbol)
       raise ArgumentError unless body.is_a?(Proc)
@@ -28,9 +30,9 @@ module GetProjects::Matcher
     def add_matchers
       files = []
       Dirs.each do |dir|
-        files.concat(dir.children(false))
+        files.concat(dir.children(false).map{|x|dir.join(x)})
       end
-      files.sort_by{|x|x.basename.to_i}.each do |file|
+      files.sort_by{|x|x.basename.to_s.to_i}.each do |file|
         require_relative file
       end
     end
