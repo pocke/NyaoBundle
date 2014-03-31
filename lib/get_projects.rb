@@ -1,4 +1,4 @@
-class GetProjects
+module GetProjects
 end
 
 require_relative 'get_projects/getter'
