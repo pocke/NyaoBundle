@@ -1,32 +1,23 @@
 require 'pathname'
 
-# このモジュールにメソッドを追加した場合、それがMatcherになる。
-# Matcher は、xxx_yyy.rb といった名前で指定のディレクトリに定義する。
+# GetProjects::Matcher::create(:name){|project, opt|}
+# 上のようにして matcher を定義する。
+# Matcher は、xxx_yyy.rb といった名前で GetProjects::Matcher::Dir に定義する。
 # xxx に数値、yyy に Matcher の名前を指定する。
 # xxx の値が小さいほど優先して Matcher が使用される。
 module GetProjects::Matcher
-  class WrongMatcher < StandardError; end
-
   # Matcher のリスト
-  All = []
+  All = Hash.new
 
   Dirs = [Pathname.new(File::expand_path('../matchers',  __FILE__))]
 
   class << self
-    # メソッドが定義される度に Matcher として登録する。
-    def method_added(name)
-      matcher = instance_method(name)
-      matcher_params = matcher.parameters
-
-      # def matcher(project, opt = {})
-      #   ...
-      # end
-      # のような形になっているべき
-      unless matcher_params.size == 2 and matcher_params.first.first == :req and matcher_params.last.first == :opt
-        raise WrongMatcher
-      end
-
-      All << name
+    # matcher を定義する。
+    def create(matcher_name, &body)
+      raise ArgumentError unless matcher_name.is_a?(Symbol)
+      raise ArgumentError unless body.is_a?(Proc)
+      raise ArgumentError unless body.parameters.size == 2
+      All[matcher_name] = body
     end
 
     include Enumerable

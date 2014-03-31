@@ -3,24 +3,25 @@ require_relative '../spec_helper'
 describe GetProjects::Matcher do
   describe 'All' do
     subject{GetProjects::Matcher::All}
-    it{should be_kind_of Array}
+    it{should be_kind_of Hash}
 
     context 'when add matcher' do
       before(:all) do
-        module GetProjects::Matcher;def mat(p, o={});end;end
+        GetProjects::Matcher::create(:hoge) do |prj, opt|
+        end
       end
 
       it 'should be include added matcher' do 
-        expect(subject).to be_include(:mat)
+        expect(subject).to be_include(:hoge)
       end
     end
 
     context 'when add worng matcher' do
-      let(:matcher){module GetProjects::Matcher;def mat();end;end}
+      let(:matcher1){GetProjects::Matcher::create('hoge'){|prj, opt|}}
+      let(:matcher2){GetProjects::Matcher::create(:hoge){|prj|}}
 
-      it do
-        expect{matcher}.to raise_error(GetProjects::Matcher::WrongMatcher)
-      end
+      it {expect{matcher1}.to raise_error(ArgumentError)}
+      it {expect{matcher2}.to raise_error(ArgumentError)}
     end
 
   end
