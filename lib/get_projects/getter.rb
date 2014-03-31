@@ -1,26 +1,11 @@
-# TODO: DRY
-module GetProjects::Getter
-  All = Hash.new
+require 'pathname'
+require_relative 'base'
 
+module GetProjects::Getter
+  include GetProjects::Base
   Dirs = [Pathname.new(File::expand_path('../getters',  __FILE__))]
 
   class << self
-    def create(getter_name, &body)
-      raise ArgumentError unless getter_name.is_a?(Symbol)
-      raise ArgumentError unless body.is_a?(Proc)
-      raise ArgumentError unless body.parameters.size == 2
-      All[getter_name] = body
-    end
-
-    include Enumerable
-    def each(*args)
-      All.each(*args)
-    end
-
-    def [](key)
-      All[key]
-    end
-
     def add_getters
       files = []
       Dirs.each do |dir|

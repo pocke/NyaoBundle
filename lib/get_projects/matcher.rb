@@ -1,4 +1,5 @@
 require 'pathname'
+require_relative 'base'
 
 # GetProjects::Matcher::create(:name){|project, opt|}
 # 上のようにして matcher を定義する。
@@ -6,31 +7,10 @@ require 'pathname'
 # xxx に数値、yyy に Matcher の名前を指定する。
 # xxx の値が小さいほど優先して Matcher が使用される。
 module GetProjects::Matcher
-  # Matcher のリスト
-  All = Hash.new
-
+  include GetProjects::Base
   Dirs = [Pathname.new(File::expand_path('../matchers',  __FILE__))]
 
   class << self
-    # matcher を定義する。
-    # マッチしなければ nil を、マッチすれば getter に必要な URL などを返す。
-    # また、マッチした場合は opt を適当に編集する。
-    def create(matcher_name, &body)
-      raise ArgumentError unless matcher_name.is_a?(Symbol)
-      raise ArgumentError unless body.is_a?(Proc)
-      raise ArgumentError unless body.parameters.size == 2
-      All[matcher_name] = body
-    end
-
-    include Enumerable
-    def each(*args)
-      All.each(*args)
-    end
-
-    def [](key)
-      All[key]
-    end
-
     def add_matchers
       files = []
       Dirs.each do |dir|
@@ -41,6 +21,5 @@ module GetProjects::Matcher
       end
     end
   end
-
   self.add_matchers
 end
