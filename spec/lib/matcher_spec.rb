@@ -4,8 +4,11 @@ describe GetProjects::Matcher do
   describe 'All' do
     subject{GetProjects::Matcher::All}
     it{should be_kind_of Hash}
+  end
 
+  describe '.create' do
     context 'when add matcher' do
+      subject{GetProjects::Matcher::All}
       before(:all) do
         GetProjects::Matcher::create(:hoge) do |prj, opt|
         end
@@ -23,7 +26,6 @@ describe GetProjects::Matcher do
       it {expect{matcher1}.to raise_error(ArgumentError)}
       it {expect{matcher2}.to raise_error(ArgumentError)}
     end
-
   end
 
   describe Enumerable do
