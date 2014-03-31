@@ -12,29 +12,31 @@ module GetProjects::Matcher
 
   Dirs = [Pathname.new(File::expand_path('../matchers',  __FILE__))]
 
-  # メソッドが定義される度に Matcher として登録する。
-  def self.method_added(name)
-    matcher = instance_method(name)
-    matcher_params = matcher.parameters
+  class << self
+    # メソッドが定義される度に Matcher として登録する。
+    def method_added(name)
+      matcher = instance_method(name)
+      matcher_params = matcher.parameters
 
-    # def matcher(project, opt = {})
-    #   ...
-    # end
-    # のような形になっているべき
-    unless matcher_params.size == 2 and matcher_params.first.first == :req and matcher_params.last.first == :opt
-      raise WrongMatcher
+      # def matcher(project, opt = {})
+      #   ...
+      # end
+      # のような形になっているべき
+      unless matcher_params.size == 2 and matcher_params.first.first == :req and matcher_params.last.first == :opt
+        raise WrongMatcher
+      end
+
+      All << name
     end
 
-    All << name
-  end
-
-  def self.add_matchers
-    files = []
-    Dirs.each do |dir|
-      files.concat(dir.children(false))
-    end
-    files.sort_by{|x|x.basename.to_i}.each do |file|
-      require_relative file
+    def add_matchers
+      files = []
+      Dirs.each do |dir|
+        files.concat(dir.children(false))
+      end
+      files.sort_by{|x|x.basename.to_i}.each do |file|
+        require_relative file
+      end
     end
   end
   self.add_matchers
