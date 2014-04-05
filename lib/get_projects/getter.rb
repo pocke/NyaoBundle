@@ -10,7 +10,7 @@ module GetProjects
       def add_getters
         files = []
         Dirs.each do |dir|
-          files.concat(dir.children(false).map{|x|dir.join(x)})
+          files.concat(dir.children(false).select{|x|/\.rb$/ =~ x.to_s}.map{|x|dir.join(x)})
         end
         files.sort_by{|x|x.basename.to_s.to_i}.each do |file|
           require_relative file
