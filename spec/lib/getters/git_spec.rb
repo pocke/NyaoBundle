@@ -5,8 +5,8 @@ require_relative '../../spec_helper'
 describe 'git getter' do
   subject{NyaoBundle::Getter[:git]}
 
-  url = 'git@bitbucket.org:pocke/get_projects.git'
-  opt = {name: 'get_projects', getter: 'git'}
+  url = 'git@bitbucket.org:pocke/NyaoBundle.git'
+  opt = {name: 'NyaoBundle', getter: 'git'}
 
   describe 'clone project' do
     current_dir = Dir::pwd

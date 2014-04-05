@@ -1,5 +1,5 @@
-require_relative 'get_projects/getter'
-require_relative 'get_projects/matcher'
+require_relative 'nyao_bundle/getter'
+require_relative 'nyao_bundle/matcher'
 
 module NyaoBundle
   module_function
