@@ -5,7 +5,7 @@ require_relative '../../spec_helper'
 describe 'git getter' do
   subject{NyaoBundle::Getter[:git]}
 
-  url = 'git@bitbucket.org:pocke/NyaoBundle.git'
+  url = 'https://github.com/pocke/NyaoBundle.git'
   opt = {name: 'NyaoBundle', getter: 'git'}
 
   describe 'clone project' do
