@@ -1,9 +1,9 @@
 require 'pathname'
 require_relative 'base'
 
-module GetProjects
+module NyaoBundle
   module Getter
-    include GetProjects::Base
+    include NyaoBundle::Base
     Dirs = [Pathname.new(File::expand_path('../getters',  __FILE__))]
 
     class << self

@@ -1,7 +1,7 @@
 require_relative '../../spec_helper'
 
 describe 'github matcher' do
-  subject{GetProjects::Matcher[:github]}
+  subject{NyaoBundle::Matcher[:github]}
 
   project = 'pocke/dotfiles'
   opt = {}

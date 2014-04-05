@@ -1,7 +1,7 @@
 require_relative 'get_projects/getter'
 require_relative 'get_projects/matcher'
 
-module GetProjects
+module NyaoBundle
   module_function
   def get(project, opt = {})
     if opt[:getter] then

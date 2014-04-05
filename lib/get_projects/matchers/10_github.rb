@@ -1,4 +1,4 @@
-GetProjects::Matcher::create(:github) do |project, opt|
+NyaoBundle::Matcher::create(:github) do |project, opt|
   next nil unless (user, repo = project.split('/')).size == 2
   user_rxp = /^[[:alnum:]]([[:alnum:]]|-)*$/
   repo_rxp = /^([[:alnum:]]|\.|-|_)+$/

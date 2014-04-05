@@ -1,4 +1,4 @@
-GetProjects::Getter::create(:git) do |url, opt|
+NyaoBundle::Getter::create(:git) do |url, opt|
   if Dir::exist?(opt[:name]) then
     Dir::chdir(opt[:name]) do
       system('git', 'pull', '--rebase')

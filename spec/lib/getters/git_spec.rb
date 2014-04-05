@@ -3,7 +3,7 @@ require 'tmpdir'
 require_relative '../../spec_helper'
 
 describe 'git getter' do
-  subject{GetProjects::Getter[:git]}
+  subject{NyaoBundle::Getter[:git]}
 
   url = 'git@bitbucket.org:pocke/get_projects.git'
   opt = {name: 'get_projects', getter: 'git'}

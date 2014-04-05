@@ -1,4 +1,4 @@
-module GetProjects
+module NyaoBundle
   module Base
     def self.included(klass)
       klass.class_eval do
