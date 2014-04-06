@@ -12,7 +12,7 @@ module NyaoBundle
         Dirs.each do |dir|
           files.concat(dir.children(false).select{|x|/\.rb$/ =~ x.to_s}.map{|x|dir.join(x)})
         end
-        files.sort_by{|x|x.basename.to_s.to_i}.each do |file|
+        files.each do |file|
           require_relative file
         end
       end
