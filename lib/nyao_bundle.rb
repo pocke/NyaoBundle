@@ -1,3 +1,7 @@
+# Copyright 2014, pocke
+# Licensed MIT
+# http://opensource.org/licenses/mit-license.php
+
 require_relative 'nyao_bundle/getter'
 require_relative 'nyao_bundle/matcher'
 

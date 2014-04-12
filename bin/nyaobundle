@@ -1,5 +1,9 @@
 #!/usr/bin/env ruby
 
+# Copyright 2014, pocke
+# Licensed MIT
+# http://opensource.org/licenses/mit-license.php
+
 require_relative '../lib/nyao_bundle'
 
 include NyaoBundle
