@@ -7,6 +7,7 @@ require_relative 'nyao_bundle/matcher'
 
 module NyaoBundle
   module_function
+
   def get(project, opt = {})
     if opt[:getter] then
       address = project
